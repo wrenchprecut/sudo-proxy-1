@@ -3,7 +3,7 @@ import pkg from "./package.json";
 
 //https://nitro.unjs.io/config
 export default defineNitroConfig({
-  noPublicDir: true,
+  noPublicDir: false,
   compatibilityDate: "2025-04-20",
   srcDir: "./src",
   runtimeConfig: {
