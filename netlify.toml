@@ -1,5 +1,5 @@
 [build]
-command = "pnpm build:netlify"
+command = "bun run build:netlify"
 publish = ".netlify"
 edge_functions = ".netlify/functions"
 [functions]

@@ -14,25 +14,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         
-      - uses: pnpm/action-setup@v2
+      - uses: oven-sh/setup-bun@v2
         with:
-          version: latest
+          bun-version: latest
 
       - name: Get version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@main
 
       - name: Install packages
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
       - name: Build for cloudflare
-        run: pnpm build:cloudflare && cp ./.output/server/index.mjs ./cloudflare.worker.mjs
+        run: bun run build:cloudflare && cp ./.output/server/index.mjs ./cloudflare.worker.mjs
 
       - name: Build for AWS
-        run: pnpm build:aws && cd .output/server && zip -r ../../lambda.zip .
+        run: bun run build:aws && cd .output/server && zip -r ../../lambda.zip .
 
       - name: Build for Node
-        run: pnpm build:node && cd .output/server && zip -r ../../nodejs.zip .
+        run: bun run build:node && cd .output/server && zip -r ../../nodejs.zip .
 
       - name: Create Release
         id: create_release

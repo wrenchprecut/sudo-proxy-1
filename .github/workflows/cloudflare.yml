@@ -13,21 +13,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         
-      - uses: pnpm/action-setup@v2
+      - uses: oven-sh/setup-bun@v2
         with:
-          version: latest
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: 'pnpm'
+          bun-version: latest
 
       - name: Install packages
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
       - name: Build Project
-        run: pnpm build:cloudflare
+        run: bun run build:cloudflare
 
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3

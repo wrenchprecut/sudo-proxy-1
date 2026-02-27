@@ -1,14 +1,13 @@
-FROM node:20-alpine as base
+FROM oven/bun:1-alpine as base
 WORKDIR /app
 
 # Build layer
 FROM base as build
 
-RUN npm i -g pnpm
-COPY pnpm-lock.yaml package.json ./
-RUN pnpm install --frozen-lockfile
+COPY bun.lock package.json ./
+RUN bun install --frozen-lockfile
 COPY . .
-RUN pnpm build
+RUN bun run build:bun
 
 # Production layer
 FROM base as production
@@ -17,4 +16,4 @@ EXPOSE 3000
 ENV NODE_ENV=production
 COPY --from=build /app/.output ./.output
 
-CMD ["node", ".output/server/index.mjs"]
+CMD ["bun", "run", ".output/server/index.mjs"]
