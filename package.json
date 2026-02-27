@@ -1,7 +1,7 @@
 {
   "name": "simple-proxy",
   "private": true,
-  "version": "2.1.6",
+  "version": "2.1.7",
   "scripts": {
     "prepare": "bunx nitropack prepare",
     "dev": "bunx nitropack dev",
